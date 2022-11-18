@@ -1,0 +1,102 @@
+<template>
+  <button
+    :class="buttonClasses"
+    :disabled="mustDisableButton"
+    role="button"
+    type="button"
+    @click="onClick($event)"
+  >
+    <span class="bg-inherit" ></span>
+    <slot></slot>
+  </button>
+</template>
+
+<script lang="ts">
+import { computed } from 'vue'
+import { defineComponent, type PropType } from 'vue'
+
+interface ButtonVariant {
+  default: string[]
+  outline: string[]
+  black: string[]
+}
+
+interface ButtonType {
+  primary: string[]
+  danger: string[]
+  default: string[]
+  secondary: string[]
+  black: string[]
+}
+
+export default defineComponent({
+  name: 'BaseButton',
+  emits: ['click'],
+  props: {
+    type: {
+      type: String as PropType<keyof ButtonType>,
+      required: false,
+      default: () => 'primary'
+    },
+    variant: {
+      type: String as PropType<keyof ButtonVariant>,
+      required: false,
+      default: () => 'default'
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: () => false
+    },
+    isLoading: {
+      type: Boolean,
+      required: false,
+      default: () => false
+    }
+  },
+  setup(props, { emit }) {
+    const buttonVariantClasses: ButtonVariant = {
+      black: [],
+      default: ['rounded-md border-none', 'px-3 py-1'],
+      outline: []
+    }
+
+    const buttonTypeClasses: ButtonType = {
+      primary: [
+        'bg-blue-600 hover:bg-blue-700 transition-colors',
+        'focus:ring-2 focus:ring-blue-300',
+        'shadow-md shadow-blue-50',
+        'text-white font-bold'
+      ],
+      black: [],
+      danger: [],
+      default: [],
+      secondary: []
+    }
+
+    const mustDisableButton = computed((): boolean => {
+      return props.disabled || props.isLoading
+    })
+    const defaultClasses = ['w-full', 'transition-colors']
+    const buttonClasses = computed((): string[] => {
+      const buttonClassesArray = [...defaultClasses, ...buttonTypeClasses[props.type], ...buttonVariantClasses[props.variant]]
+
+      if (mustDisableButton.value) {
+        buttonClassesArray.push('opacity-50')
+      }
+
+      return buttonClassesArray
+    })
+
+    const onClick = (event: MouseEvent): void => {
+      emit('click', event)
+    }
+
+    return {
+      onClick,
+      buttonClasses,
+      mustDisableButton
+    }
+  }
+})
+</script>
