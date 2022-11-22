@@ -23,7 +23,8 @@ module.exports = {
       {
         ignoreRestSiblings: true,
         argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_'
+        varsIgnorePattern: '^_',
+        Enumerator: false
       }
     ],
     '@typescript-eslint/no-unused-vars': [
