@@ -1,11 +1,5 @@
 <template>
-  <button
-    :class="buttonClasses"
-    :disabled="mustDisableButton"
-    role="button"
-    type="button"
-    @click="onClick($event)"
-  >
+  <button :class="buttonClasses" :disabled="mustDisableButton" role="button" type="button" @click="onClick($event)">
     <slot></slot>
   </button>
 </template>
@@ -56,7 +50,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const buttonVariantClasses: ButtonVariant = {
       black: [],
-      default: ['rounded-md border-none', 'px-3 py-1'],
+      default: ['rounded-md border-none', 'px-3 py-2'],
       outline: []
     }
 
