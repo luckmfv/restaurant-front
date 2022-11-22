@@ -1,5 +1,10 @@
 <template>
-  <div :class="['base-card bg-white w-fit h-fit', computedSpacing, 'shadow-md']">
+  <div :class="[
+    'base-card bg-white w-fit h-fit',
+    'shadow-md',
+    'rounded-md',
+    computedSpacing
+  ]">
     <slot></slot>
   </div>
 </template>
