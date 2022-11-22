@@ -50,7 +50,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const buttonVariantClasses: ButtonVariant = {
       black: [],
-      default: ['rounded-md border-none', 'px-3 py-2'],
+      default: ['rounded-md', 'px-3 py-2'],
       outline: []
     }
 
@@ -59,12 +59,19 @@ export default defineComponent({
         'bg-blue-600 hover:bg-blue-700 transition-colors',
         'focus:ring-2 focus:ring-blue-300',
         'shadow-md shadow-blue-50',
-        'text-white font-bold'
+        'text-white font-bold',
+        'border-none'
       ],
       black: [],
       danger: [],
       default: [],
-      secondary: []
+      secondary: [
+        'bg-white hover:bg-blue-200 transition-colors',
+        'focus:ring-2 focus:ring-blue-200',
+        'shadow-md shadow-blue-50',
+        'border-[1px]',
+        'font-bold'
+      ]
     }
 
     const mustDisableButton = computed((): boolean => {
