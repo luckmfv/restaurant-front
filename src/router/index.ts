@@ -9,7 +9,7 @@ const router = createRouter({
       name: 'login',
       component: LoginPage,
       meta: {
-        layout: Layout.PRIVATE
+        layout: Layout.PUBLIC
       }
     }
   ]
