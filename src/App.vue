@@ -14,7 +14,11 @@ export default defineComponent({
 })
 </script>
 <style>
-body {
-  background-color: theme('colors.blue.50')
+#app {
+  background-color: theme('colors.blue.50');
+  width: theme('width.full');
+  height: theme('height.full');
+  min-height: 100vh;
+  font-family: theme('fontFamily.sans');
 }
 </style>
