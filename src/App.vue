@@ -13,3 +13,8 @@ export default defineComponent({
   }
 })
 </script>
+<style>
+body {
+  background-color: theme('colors.blue.50')
+}
+</style>
