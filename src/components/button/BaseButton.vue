@@ -6,7 +6,6 @@
     type="button"
     @click="onClick($event)"
   >
-    <span class="bg-inherit" ></span>
     <slot></slot>
   </button>
 </template>
