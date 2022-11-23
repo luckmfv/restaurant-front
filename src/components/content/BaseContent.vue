@@ -1,6 +1,6 @@
 <template>
-  <div id="layout-public" class="flex flex-col h-full w-full min-h-screen">
-    <RouterView />
+  <div class="flex flex-col w-full min-w-[300px] p-4">
+    <slot></slot>
   </div>
 </template>
 
@@ -8,6 +8,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'layout-public'
+  name: 'BaseContent',
 })
 </script>

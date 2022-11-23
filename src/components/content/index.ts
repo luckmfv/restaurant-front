@@ -1,0 +1,1 @@
+export { default as BaseContent } from './BaseContent.vue'
