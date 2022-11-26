@@ -8,6 +8,11 @@
 import { computed } from 'vue'
 import { defineComponent, type PropType } from 'vue'
 
+interface DynamicButton<T = any> {
+  enabled: T
+  disabled: T
+}
+
 interface ButtonVariant {
   default: string[]
   outline: string[]
@@ -54,24 +59,46 @@ export default defineComponent({
       outline: []
     }
 
-    const buttonTypeClasses: ButtonType = {
-      primary: [
-        'bg-blue-600 hover:bg-blue-700 transition-colors',
-        'focus:ring-2 focus:ring-blue-300',
-        'shadow-md shadow-blue-50',
-        'text-white font-bold',
-        'border-none'
-      ],
-      black: [],
-      danger: [],
-      default: [],
-      secondary: [
-        'bg-white hover:bg-blue-200 transition-colors',
-        'focus:ring-2 focus:ring-blue-200',
-        'shadow-md shadow-blue-50',
-        'border-[1px]',
-        'font-bold'
-      ]
+    const buttonTypeClasses: DynamicButton<ButtonType> = {
+      enabled: {
+        primary: [
+          'bg-blue-600 hover:bg-blue-700 transition-colors',
+          'focus:ring-2 focus:ring-blue-300',
+          'shadow-md shadow-blue-50',
+          'text-white font-bold',
+          'border-none'
+        ],
+        black: [],
+        danger: [],
+        default: [],
+        secondary: [
+          'bg-white hover:bg-blue-200 transition-colors',
+          'focus:ring-2 focus:ring-blue-200',
+          'shadow-md shadow-blue-50',
+          'border-[1px]',
+          'font-bold'
+        ]
+      },
+      disabled: {
+        primary: [
+          'bg-blue-600 transition-colors',
+          'focus:ring-2 focus:ring-blue-300',
+          'shadow-md shadow-blue-50',
+          'text-white font-bold',
+          'border-none',
+          'cursor-not-allowed'
+        ],
+        black: [],
+        danger: [],
+        default: [],
+        secondary: [
+          'bg-white hover:bg-blue-200 transition-colors',
+          'focus:ring-2 focus:ring-blue-200',
+          'shadow-md shadow-blue-50',
+          'border-[1px]',
+          'font-bold'
+        ]
+      }
     }
 
     const mustDisableButton = computed((): boolean => {
@@ -79,7 +106,8 @@ export default defineComponent({
     })
     const defaultClasses = ['w-full', 'transition-colors']
     const buttonClasses = computed((): string[] => {
-      const buttonClassesArray = [...defaultClasses, ...buttonTypeClasses[props.type], ...buttonVariantClasses[props.variant]]
+      const dynamicProp: keyof DynamicButton = props.disabled ? 'disabled' : 'enabled'
+      const buttonClassesArray = [...defaultClasses, ...buttonTypeClasses[dynamicProp][props.type], ...buttonVariantClasses[props.variant]]
 
       if (mustDisableButton.value) {
         buttonClassesArray.push('opacity-50')
