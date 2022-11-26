@@ -1,9 +1,11 @@
 import { installComponents } from './components/install'
 import { createApp } from 'vue'
-import router from './router'
+import { router, prepareAppRoutes } from './router'
 import App from './App.vue'
 
 import './assets/main.css'
+
+prepareAppRoutes(router)
 
 const app = createApp(App)
 
