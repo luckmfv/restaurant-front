@@ -37,10 +37,10 @@
 
 <script lang="ts">
 import { useAuthStorage } from '@/modules/app/compositions'
-import { authService } from '@/modules/onboarding/services'
 import { helpers, required } from '@vuelidate/validators'
-import { LoginFormDto } from '@/modules/onboarding/dtos'
+import { authService } from '@/modules/auth/services'
 import { defineComponent, ref, computed } from 'vue'
+import { LoginFormDto } from '@/modules/auth/dtos'
 import useVuelidate from '@vuelidate/core'
 import router from '@/router'
 

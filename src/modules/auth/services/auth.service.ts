@@ -1,4 +1,4 @@
-import type { CreateAccountFormDto, LoginFormDto } from '../dtos'
+import type { CreateAccountFormDto, LoginFormDto } from '@/modules/auth/dtos'
 
 class AuthService {
   public async signIn(_loginFormDto: LoginFormDto): Promise<string> {

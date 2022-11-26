@@ -42,12 +42,12 @@
 </template>
 
 <script lang="ts">
-import router from '@/router'
+import { required, helpers, minLength } from '@vuelidate/validators'
+import { CreateAccountFormDto } from '@/modules/auth/dtos'
+import { authService } from '@/modules/auth/services'
 import { defineComponent, computed, ref } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
-import { required, helpers, minLength } from '@vuelidate/validators'
-import { CreateAccountFormDto } from '@/modules/onboarding/dtos'
-import { authService } from '../services'
+import router from '@/router'
 
 export default defineComponent({
   name: 'CreateAccount.page',

@@ -1,6 +1,6 @@
+import { LoginPage, CreateAccount } from '@/modules/auth/pages'
 import type { RouteRecordRaw } from 'vue-router'
 import { Layout } from '@/layouts/enums'
-import { LoginPage, CreateAccount } from './pages'
 
 export const routes: RouteRecordRaw[] = [
   {
