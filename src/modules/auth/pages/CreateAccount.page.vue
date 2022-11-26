@@ -47,12 +47,14 @@ import { CreateAccountFormDto } from '@/modules/auth/dtos'
 import { authService } from '@/modules/auth/services'
 import { defineComponent, computed, ref } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'CreateAccount.page',
   setup() {
     const createAccountForm = ref(CreateAccountFormDto.blankForm())
+
+    const router = useRouter()
 
     const rules = computed(() => ({
       username: {

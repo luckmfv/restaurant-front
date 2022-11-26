@@ -42,11 +42,12 @@ import { authService } from '@/modules/auth/services'
 import { defineComponent, ref, computed } from 'vue'
 import { LoginFormDto } from '@/modules/auth/dtos'
 import useVuelidate from '@vuelidate/core'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'page-login',
   setup() {
+    const router = useRouter()
     const { setAuthToken } = useAuthStorage()
     const form = ref<LoginFormDto>(LoginFormDto.blankForm())
 
