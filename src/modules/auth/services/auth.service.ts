@@ -6,6 +6,8 @@ class AuthService {
   }
 
   public async createAccount(_createAccountFormDto: CreateAccountFormDto): Promise<void> {}
+
+  public async me(): Promise<void> {}
 }
 
 export const authService = new AuthService()
