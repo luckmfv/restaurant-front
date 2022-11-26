@@ -47,11 +47,13 @@ import { defineComponent, computed, ref } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers, minLength } from '@vuelidate/validators'
 import { CreateAccountFormDto } from '@/modules/onboarding/dtos'
+import { authService } from '../services'
 
 export default defineComponent({
   name: 'CreateAccount.page',
   setup() {
     const createAccountForm = ref(CreateAccountFormDto.blankForm())
+
     const rules = computed(() => ({
       username: {
         required: helpers.withMessage('Campo obrigatório', required),
@@ -69,13 +71,14 @@ export default defineComponent({
       router.push({ name: 'auth.login' })
     }
 
-    const onRegister = (): void => {
+    const onRegister = async(): Promise<void> => {
       v$.value.$touch()
 
       if (v$.value.$error) {
         return
       }
 
+      await authService.createAccount(createAccountForm.value)
       goToLogin()
     }
 
