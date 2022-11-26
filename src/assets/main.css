@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .text-title {
+    line-height: 1.25rem;
+    font-size: 1.75rem;
+  }
+}
