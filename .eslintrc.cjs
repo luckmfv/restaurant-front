@@ -16,15 +16,16 @@ module.exports = {
     'semi': ['error', 'never'],
     'max-len': ['error', { 'code': 150 }],
     'quotes': ['error', 'single'],
+    '@typescript-eslint/quotes': ['error', 'single'],
     'key-spacing': ['error', { 'afterColon': true }],
     'object-curly-spacing': ['error', 'always'],
+    'space-before-function-paren': ['error', 'never'],
     'no-unused-vars': [
       'error',
       {
         ignoreRestSiblings: true,
         argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        Enumerator: false
+        varsIgnorePattern: '^_'
       }
     ],
     '@typescript-eslint/no-unused-vars': [
