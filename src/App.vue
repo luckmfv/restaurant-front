@@ -19,6 +19,6 @@ export default defineComponent({
   width: theme('width.full');
   height: theme('height.full');
   min-height: 100vh;
-  font-family: theme('fontFamily.sans');
+  font-family: theme('fontFamily.base');
 }
 </style>
