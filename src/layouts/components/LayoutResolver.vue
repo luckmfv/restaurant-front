@@ -3,11 +3,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { LayoutPublic, LayoutPrivate } from '@/layouts/components'
-import { computed } from '@vue/reactivity'
+import { defineComponent, computed } from 'vue'
+import { Layout } from '@/layouts/enums'
 import { useRoute } from 'vue-router'
-import { Layout } from '../enums'
 
 export default defineComponent({
   name: 'layout-resolver',
