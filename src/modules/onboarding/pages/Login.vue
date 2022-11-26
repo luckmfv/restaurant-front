@@ -36,8 +36,10 @@
 </template>
 
 <script lang="ts">
+import { authService } from '@/modules/onboarding/services'
 import { helpers, required } from '@vuelidate/validators'
 import { LoginFormDto } from '@/modules/onboarding/dtos'
+import { useAuthStorage } from '@/modules/app/compositions'
 import { defineComponent, ref, computed } from 'vue'
 import useVuelidate from '@vuelidate/core'
 import router from '@/router'
@@ -45,6 +47,7 @@ import router from '@/router'
 export default defineComponent({
   name: 'page-login',
   setup() {
+    const { setAuthToken } = useAuthStorage()
     const form = ref<LoginFormDto>(LoginFormDto.blankForm())
 
     const rules = computed(() => ({
@@ -58,14 +61,15 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, form, { $registerAs: 'Login.page' })
 
-    const onLogin = (): void => {
+    const onLogin = async(): Promise<void> => {
       v$.value.$touch()
 
       if (v$.value.$error) {
         return
       }
 
-
+      const authToken = await authService.signIn(form.value)
+      setAuthToken(authToken)
     }
 
     const onRegister = (): void => {
