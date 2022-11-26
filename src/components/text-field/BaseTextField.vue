@@ -9,11 +9,15 @@
       @blur="onBlur($event)"
       @focus="onFocus($event)"
     />
+    <p v-if="shouldShowErrorMessage" class="text-red-500 mt-1 text-xs pl-1">
+      {{ errorMessage }}
+    </p>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import type { BaseValidation, ValidationRuleCollection } from '@vuelidate/core'
+import { defineComponent, type PropType } from 'vue'
 import { computed } from 'vue'
 
 export default defineComponent({
@@ -34,6 +38,15 @@ export default defineComponent({
       type: String,
       required: false,
       default: () => ''
+    },
+    vuelidateField: {
+      type: Object as PropType<BaseValidation<any, ValidationRuleCollection<any>>>,
+      required: false
+    },
+    resetOnChange: {
+      type: Boolean,
+      required: false,
+      dafault: () => false
     }
   },
   setup(props, { emit }) {
@@ -46,7 +59,25 @@ export default defineComponent({
       }
     })
 
+    const shouldShowErrorMessage = computed(() => Boolean(props.vuelidateField?.$error))
+
+    const errorMessage = computed(() => {
+      if (!shouldShowErrorMessage.value) {
+        return ''
+      }
+
+      const [error] = props.vuelidateField.$errors
+
+      return error.$message
+    })
+
+    const shouldResetOnChange = computed(() => props.resetOnChange && props.vuelidateField)
+
     const onInput = (value: string | number): void => {
+      if (shouldResetOnChange.value) {
+        props.vuelidateField.$reset()
+      }
+
       emit('update:modelValue', value)
     }
 
@@ -66,7 +97,9 @@ export default defineComponent({
       onChange,
       onFocus,
       onBlur,
-      localModelValue
+      shouldShowErrorMessage,
+      localModelValue,
+      errorMessage
     }
   }
 })
