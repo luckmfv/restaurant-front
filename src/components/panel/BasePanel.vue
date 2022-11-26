@@ -15,9 +15,9 @@ import { defineComponent, type PropType } from 'vue'
 import { BasePanelSpacingEnum } from './enums'
 
 const spacingClasses: Record<BasePanelSpacingEnum, string> = {
-  sm: 'p-2',
-  md: 'p-4',
-  lg: 'p-6',
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8',
   none: 'p-0'
 }
 
