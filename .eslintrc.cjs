@@ -20,6 +20,9 @@ module.exports = {
     'key-spacing': ['error', { 'afterColon': true }],
     'object-curly-spacing': ['error', 'always'],
     'space-before-function-paren': ['error', 'never'],
+    'no-trailing-spaces': 'error',
+    'no-mixed-spaces-and-tabs': 'error',
+    'indent': ['error', 2],
     'no-unused-vars': [
       'error',
       {
@@ -35,6 +38,10 @@ module.exports = {
         argsIgnorePattern: '^_',
         varsIgnorePattern: '^_'
       }
+    ],
+    'prefer-destructuring': ['error', {
+      'array': true
+    }
     ]
   }
 }
