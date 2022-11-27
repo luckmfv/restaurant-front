@@ -1,5 +1,3 @@
-import { computed } from 'vue'
-
 export const useAuthStorage = () => {
   const authKey = 'authToken'
 
@@ -15,14 +13,14 @@ export const useAuthStorage = () => {
     localStorage.removeItem(authKey)
   }
 
-  const hasAuthToken = computed((): boolean => {
+  const verifyIfHasAuthToken = (): boolean => {
     return Boolean(getAuthToken())
-  })
+  }
 
   return {
+    verifyIfHasAuthToken,
     removeAuthToken,
     setAuthToken,
-    getAuthToken,
-    hasAuthToken
+    getAuthToken
   }
 }
