@@ -1,17 +1,24 @@
-import { useAuthStorage } from '@/modules/app/compositions'
+import { useAuthStorage, useProfile } from '@/modules/app/compositions'
 import { authService } from '@/modules/auth/services'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
-const { removeAuthToken } = useAuthStorage()
+const { removeAuthToken, verifyIfHasAuthToken } = useAuthStorage()
+const { setProfile } = useProfile()
 
 class ApplicationSercice {
-  public async setUser(): Promise<void> {
+  public async setProfile(): Promise<boolean> {
+    if (!verifyIfHasAuthToken()) {
+      return false
+    }
+
     try {
-      await authService.me()
+      const profile = await authService.me()
+      setProfile(profile)
+
+      return true
     } catch {
       removeAuthToken()
-      router.push({ name: 'auth.login' })
+
+      return false
     }
   }
 }
