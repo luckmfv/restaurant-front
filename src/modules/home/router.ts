@@ -1,13 +1,15 @@
 import type { RouteRecordRaw } from 'vue-router'
+import { HomePage } from '@/modules/home/pages'
 import { Layout } from '@/layouts/enums'
 
 export const routes: RouteRecordRaw[] = [
   {
     path: '',
     name: 'home.home',
-    redirect: { name: 'auth.login' },
+    component: HomePage,
     meta: {
-      layout: Layout.PRIVATE
+      layout: Layout.PRIVATE,
+      requireAuth: true
     }
   }
 ]
