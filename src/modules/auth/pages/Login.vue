@@ -37,6 +37,7 @@
 
 <script lang="ts">
 import { useAuthStorage } from '@/modules/app/compositions'
+import { applicationService } from '@/modules/app/services'
 import { helpers, required } from '@vuelidate/validators'
 import { authService } from '@/modules/auth/services'
 import { defineComponent, ref, computed } from 'vue'
@@ -62,6 +63,10 @@ export default defineComponent({
 
     const v$ = useVuelidate(rules, form, { $registerAs: 'Login.page' })
 
+    const goToHome = (): void => {
+      router.push({ name: 'home.home' })
+    }
+
     const onLogin = async(): Promise<void> => {
       v$.value.$touch()
 
@@ -71,6 +76,8 @@ export default defineComponent({
 
       const authToken = await authService.signIn(form.value)
       setAuthToken(authToken)
+      await applicationService.setProfile()
+      goToHome()
     }
 
     const onRegister = (): void => {
