@@ -1,8 +1,8 @@
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
 
 const isLoading = ref(false)
 
-export const useLoading = () => {
+export const useLoading = (): [Ref<boolean>, () => void, () => void] => {
   const startLoading = (): void => {
     isLoading.value = true
   }
