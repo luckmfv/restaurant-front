@@ -22,7 +22,7 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     'semi': ['error', 'never'],
     'key-spacing': ['error', { 'afterColon': true }],
-    'space-before-function-paren': ['error', 'always'],
+    'space-before-function-paren': ['error', 'never'],
     'object-curly-spacing': ['error', 'always'],
     'no-trailing-spaces': 'error',
     'no-mixed-spaces-and-tabs': 'error',
