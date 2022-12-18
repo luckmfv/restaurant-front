@@ -5,10 +5,12 @@
     </div>
     <div
       v-else
-      class="flex"
+      class="block h-full"
     >
       <BaseSidebar />
-      <RouterView />
+      <div class="block relative left-24 w-[calc(100%-96px)] h-full">
+        <RouterView />
+      </div>
     </div>
   </div>
 </template>
