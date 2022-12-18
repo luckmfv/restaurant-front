@@ -12,14 +12,18 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
+    'no-shadow': 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-fallthrough': 'off',
+    'quotes': ['error', 'single'],
+    'max-len': ['error', { 'code': 130 }],
+    'no-multiple-empty-lines': ['error', { max: 1 }],
     'comma-dangle': ['error', 'never'],
     'semi': ['error', 'never'],
-    'max-len': ['error', { 'code': 150 }],
-    'quotes': ['error', 'single'],
-    '@typescript-eslint/quotes': ['error', 'single'],
     'key-spacing': ['error', { 'afterColon': true }],
+    'space-before-function-paren': ['error', 'always'],
     'object-curly-spacing': ['error', 'always'],
-    'space-before-function-paren': ['error', 'never'],
     'no-trailing-spaces': 'error',
     'no-mixed-spaces-and-tabs': 'error',
     'indent': ['error', 2],
@@ -31,6 +35,12 @@ module.exports = {
         varsIgnorePattern: '^_'
       }
     ],
+    'prefer-destructuring': [
+      'error',
+      {
+        'array': true
+      }
+    ],
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
@@ -39,9 +49,6 @@ module.exports = {
         varsIgnorePattern: '^_'
       }
     ],
-    'prefer-destructuring': ['error', {
-      'array': true
-    }
-    ]
+    '@typescript-eslint/no-shadow': ['error']
   }
 }
