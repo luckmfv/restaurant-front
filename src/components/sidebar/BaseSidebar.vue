@@ -14,6 +14,7 @@
       h-full
       scrollbar-thin scrollbar-thumb-blue-100 scrollbar-track-blue-50
       transition ease-in-out delay-150 duration-300
+      z-10
     "
   >
     <div class="flex flex-col h-full justify-between">
