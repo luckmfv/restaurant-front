@@ -12,7 +12,7 @@
       <BaseCheckbox
         class="mt-4"
         v-model="shouldShowSocialName"
-        label="Informar nome social"
+        label="Desejo informar o nome social"
       />
 
       <Transition
@@ -69,7 +69,7 @@
         />
       </BaseField>
 
-      <div class="flex mt-4 w-full">
+      <div class="flex mt-10 w-full">
         <BaseButton
           class="mr-4"
           type="secondary"
@@ -87,10 +87,11 @@
 </template>
 
 <script lang="ts">
-import useVuelidate from '@vuelidate/core'
+import { phoneValidator, cpfValidator, emailValidator } from '@/modules/app/validators'
 import { helpers, minLength, required, requiredIf } from '@vuelidate/validators'
+import { CreateAccountFormDto } from '@/modules/auth/dtos'
 import { ref, computed, defineComponent } from 'vue'
-import { CreateAccountFormDto } from '../dtos'
+import useVuelidate from '@vuelidate/core'
 
 export default defineComponent({
   name: 'CreateAccountForm',
@@ -109,14 +110,16 @@ export default defineComponent({
       },
       documentNumber: {
         required: helpers.withMessage('Campo obrigatório', required),
-        minLength: helpers.withMessage('O campo deve possuir ao menos 6 caracteres', minLength(6))
+        cpfValidation: helpers.withMessage('O campo deve possuir ao menos 6 caracteres', cpfValidator)
       },
       contacts: {
         phone: {
-          required: helpers.withMessage('Campo obrigatório', required)
+          required: helpers.withMessage('Campo obrigatório', required),
+          phoneValidation: helpers.withMessage('Formato de telefone não aceito', phoneValidator)
         },
         email: {
-          required: helpers.withMessage('Campo obrigatório', required)
+          required: helpers.withMessage('Campo obrigatório', required),
+          emailValidation: helpers.withMessage('Email inválido', emailValidator)
         }
       },
       password: {
