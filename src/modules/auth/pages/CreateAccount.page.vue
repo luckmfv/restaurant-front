@@ -6,93 +6,39 @@
           <p class="text-title">Criar Conta</p>
         </div>
 
-        <BaseField label="Usuário" class="mt-10">
-          <BaseTextField
-            v-model="createAccountForm.username"
-            :vuelidateField="v$.username"
-            placeholder="Usuário"
-          />
-        </BaseField>
-
-        <BaseField class="mt-4" label="Senha">
-          <BaseTextField
-            type="password"
-            v-model="createAccountForm.password"
-            :vuelidateField="v$.password"
-            placeholder="Senha"
-          />
-        </BaseField>
-
-        <div class="flex mt-4 w-full">
-          <BaseButton
-            class="mr-4"
-            type="secondary"
-            @click="goToLogin()"
-          >
-            Voltar
-          </BaseButton>
-
-          <BaseButton @click="onRegister()">
-            Cadastrar-se
-          </BaseButton>
-        </div>
+        <CreateAccountForm
+          @register="onRegister($event)"
+          @back-to-login="goToLogin()"
+        />
       </BasePanel>
     </BaseContent>
   </BasePage>
 </template>
 
 <script lang="ts">
-import { required, helpers, minLength } from '@vuelidate/validators'
-import { CreateAccountFormDto } from '@/modules/auth/dtos'
+import { CreateAccountForm } from '@/modules/auth/components'
+import type { CreateAccountFormDto } from '@/modules/auth/dtos'
 import { authService } from '@/modules/auth/services'
-import { defineComponent, computed, ref } from 'vue'
-import { useVuelidate } from '@vuelidate/core'
+import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'CreateAccount.page',
+  components: { CreateAccountForm },
   setup() {
-    const createAccountForm = ref(CreateAccountFormDto.blankForm())
-
     const router = useRouter()
-
-    const rules = computed(() => ({
-      username: {
-        required: helpers.withMessage('Campo obrigatório', required),
-        minLength: helpers.withMessage('O campo deve possuir ao menos 6 caracteres', minLength(6))
-      },
-      password: {
-        required: helpers.withMessage('Campo obrigatório', required),
-        minLength: helpers.withMessage('O campo deve possuir ao menos 6 caracteres', minLength(6))
-      }
-    }))
-
-    const v$ = useVuelidate(rules, createAccountForm, { $registerAs: 'CreateAccountPage' })
 
     const goToLogin = (): void => {
       router.push({ name: 'auth.login' })
     }
-
-    const onRegister = async(): Promise<void> => {
-      v$.value.$touch()
-
-      if (v$.value.$error) {
-        return
-      }
-
-      await authService.createAccount(createAccountForm.value)
+    const onRegister = async(createAccountFormDto: CreateAccountFormDto): Promise<void> => {
+      await authService.createAccount(createAccountFormDto)
       goToLogin()
     }
-
     return {
       onRegister,
-      goToLogin,
-      createAccountForm,
-      v$
+      goToLogin
     }
   }
 })
 </script>
-<style>
-
-</style>
