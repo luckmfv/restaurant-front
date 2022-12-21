@@ -27,6 +27,7 @@ module.exports = {
     'no-trailing-spaces': 'error',
     'no-mixed-spaces-and-tabs': 'error',
     'indent': ['error', 2],
+    'eol-last': ['error', 'always'],
     'no-unused-vars': [
       'error',
       {
