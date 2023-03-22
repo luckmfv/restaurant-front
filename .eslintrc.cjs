@@ -28,14 +28,6 @@ module.exports = {
     'no-mixed-spaces-and-tabs': 'error',
     'indent': ['error', 2],
     'eol-last': ['error', 'always'],
-    'no-unused-vars': [
-      'error',
-      {
-        ignoreRestSiblings: true,
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_'
-      }
-    ],
     'prefer-destructuring': [
       'error',
       {

@@ -31,10 +31,12 @@ export default defineComponent({
     const goToLogin = (): void => {
       router.push({ name: 'auth.login' })
     }
+
     const onRegister = async(createAccountFormDto: CreateAccountFormDto): Promise<void> => {
       await authService.createAccount(createAccountFormDto)
       goToLogin()
     }
+
     return {
       onRegister,
       goToLogin

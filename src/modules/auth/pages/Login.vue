@@ -5,7 +5,7 @@
         <BaseField label="Login">
           <BaseTextField
             placeholder="Digie seu usuário"
-            v-model="form.username"
+            v-model="form.login"
             :vuelidateField="v$.username"
           />
         </BaseField>
@@ -53,7 +53,7 @@ export default defineComponent({
     const form = ref<LoginFormDto>(LoginFormDto.blankForm())
 
     const rules = computed(() => ({
-      username: {
+      login: {
         required: helpers.withMessage('Campo obrigatório', required)
       },
       password: {
@@ -74,10 +74,14 @@ export default defineComponent({
         return
       }
 
-      const authToken = await authService.signIn(form.value)
-      setAuthToken(authToken)
-      await applicationService.setProfile()
-      goToHome()
+      try {
+        const authToken = await authService.signIn(form.value)
+        setAuthToken(authToken)
+        await applicationService.setProfile()
+        goToHome()
+      } catch(error) {
+        console.log(error)
+      }
     }
 
     const onRegister = (): void => {

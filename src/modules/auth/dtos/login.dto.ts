@@ -1,13 +1,17 @@
 export class LoginFormDto {
-  username: string
+  login: string
   password: string
 
   static blankForm() {
     const loginFormDto = new LoginFormDto()
 
-    loginFormDto.username = ''
+    loginFormDto.login = ''
     loginFormDto.password = ''
 
     return loginFormDto
   }
+}
+
+export class LoginResponseDto {
+  authorization: string
 }
